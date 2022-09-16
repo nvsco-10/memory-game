@@ -36,6 +36,7 @@ const nextSequence = () => {
   const move = randomNumber();
   gameSequence.push(gameButtons[move]);
   
+  // 1s delay in between each sequence
   gameSequence.forEach((move, i) => {
     setTimeout(() => {
       animateButton(move);
@@ -45,15 +46,16 @@ const nextSequence = () => {
 
 const checkSequence = () => {
   if(gameSequence[currentSequence] === playerSequence[currentSequence]) {
+
     if(currentSequence < gameSequence.length - 1 ){
-      currentSequence++
+      currentSequence++;
     } else {
       updateLevel();
       setTimeout(() => {
         nextSequence();
       }, 1000)
-      
     }
+
   } else {
     console.log("game over")
     restartButton.style.visibility = "visible";
@@ -63,8 +65,7 @@ const checkSequence = () => {
 }
 
 const updateLevel = () => {
-  currentLevel++
-  console.log(currentLevel);
+  currentLevel++;
   level.textContent = currentLevel;
 }
 
