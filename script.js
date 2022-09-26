@@ -135,6 +135,7 @@ const resetGame = () => {
 }
 
 restartButton.addEventListener("click", () => {
+  gameOverContainer.classList.remove("show");
   startGame();
 });
 
