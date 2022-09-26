@@ -70,6 +70,7 @@ main {
 }
 
 .start-button {
+  display: none;
   background-color: rgb(34, 255, 0);
   border: solid 2px white;
   font-size: 2rem;

@@ -116,7 +116,7 @@ const startGame = () => {
   resetGame();
   gameOver = false;
 
-  startButton.classList.add('hide');
+  startButton.classList.remove('show');
   turnContainer.classList.add('show');
   displayTurn("computer");
 
