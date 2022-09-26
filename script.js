@@ -16,17 +16,14 @@ let currentLevel = 1;
 let whoseTurn;
 let gameOver;
 
+// TO-DO:
+// 1) disable buttons when computer turn
+
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     const playerMove = e.target.id;
 
-    const button = document.getElementById(playerMove);
-
-    button.classList.add("pressed");
-    playSound(playerMove);
-    setTimeout(() => {
-      button.classList.remove("pressed");
-    }, 300);
+    animateButton(playerMove);
 
     playerSequence.push(playerMove)
     checkSequence();
@@ -34,7 +31,6 @@ buttons.forEach((button) => {
 })
 
 const nextSequence = () => {  
-
   // clear player sequence
   playerSequence = [];
   currentSequence = 0;
@@ -52,6 +48,7 @@ const nextSequence = () => {
     }, i * 1000)
   })
 
+  // use set timeout to wait for loop to finish before displaying "your turn"
   setTimeout(() => {
     displayTurn("your")
   }, (gameSequence.length) * 1000)
@@ -76,10 +73,7 @@ const checkSequence = () => {
     }
 
   } else {
-    gameOver = true;
-    turnContainer.classList.remove("show");
-    startButton.classList.remove("show");
-    gameOverContainer.classList.add("show");
+    showGameOver();
   }
   
 }
@@ -133,6 +127,13 @@ const resetGame = () => {
   gameSequence = [];
 
   level.textContent = currentLevel;
+}
+
+const showGameOver = () => {
+  gameOver = true;
+  turnContainer.classList.remove("show");
+  startButton.classList.remove("show");
+  gameOverContainer.classList.add("show");
 }
 
 restartButton.addEventListener("click", () => {
