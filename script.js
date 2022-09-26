@@ -78,6 +78,7 @@ const checkSequence = () => {
   } else {
     gameOver = true;
     turnContainer.classList.remove("show");
+    startButton.classList.remove("show");
     gameOverContainer.classList.add("show");
   }
   

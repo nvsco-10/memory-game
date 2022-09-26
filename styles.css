@@ -57,6 +57,13 @@ main {
   align-items: center;
 }
 
+.start-button {
+  display: none;
+  background-color: rgb(34, 255, 0);
+  border: solid 2px white;
+  font-size: 2rem;
+}
+
 .game-control-container {
   display: flex;
   flex-direction: column;
@@ -67,13 +74,11 @@ main {
 
 .game-over-container {
   display: none;
+  text-align: center;
 }
 
-.start-button {
-  display: none;
-  background-color: rgb(34, 255, 0);
-  border: solid 2px white;
-  font-size: 2rem;
+.restart-button {
+  height: auto;
 }
 
 .turn-container {
@@ -112,6 +117,32 @@ main {
   font-size: 1.5rem;
   color: black;
 }
+
+@media (max-width: 600px) {
+  .logo {
+    font-size: 1rem;
+  }
+
+  .turn {
+    font-size: 1.5rem;
+  }
+
+  .start-button, .level-container, .game-over-container {
+    width: 90vw;
+  }
+
+  .level-text {
+    font-size: 1rem;
+  }
+
+
+  .game-over {
+    font-size: 2rem;
+  }
+
+}
+
+/***************** GAME BUTTONS *****************/
 
 .button-container {
   position: absolute;
@@ -193,11 +224,15 @@ main {
   box-shadow: 0 0 20px rgb(243, 243, 243);
 }
 
-.hide {
-  display: none;
-}
-
 .show {
   display: block;
+}
+
+@media (max-width: 600px) {
+  .button-container {
+    grid-template-columns: 1fr 1fr;
+    width: 95vw;
+    height: 400px;
+  }
 }
 
