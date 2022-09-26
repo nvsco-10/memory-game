@@ -1,6 +1,9 @@
 const buttons = document.querySelectorAll(".button");
 const level = document.querySelector(".level");
-const gameOver = document.querySelector(".game-over")
+const startButton = document.querySelector(".start-button");
+const turnContainer = document.querySelector(".turn-container");
+const turn = document.querySelector(".turn");
+const gameOverContainer = document.querySelector(".game-over-container");
 const restartButton = document.querySelector(".restart-button");
 const color = document.querySelector(".color");
 
@@ -10,6 +13,8 @@ let gameSequence = [];
 let playerSequence = [];
 let currentSequence = 0;
 let currentLevel = 0;
+let whoseTurn;
+let gameOver;
 
 buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
@@ -18,6 +23,7 @@ buttons.forEach((button) => {
     const button = document.getElementById(playerMove);
 
     button.classList.add("pressed");
+    playSound(playerMove);
     setTimeout(() => {
       button.classList.remove("pressed");
     }, 300);
@@ -27,7 +33,8 @@ buttons.forEach((button) => {
   })
 })
 
-const nextSequence = () => {
+const nextSequence = () => {  
+
   // clear player sequence
   playerSequence = [];
   currentSequence = 0;
@@ -35,13 +42,20 @@ const nextSequence = () => {
   // generate random number to represent next move in sequence
   const move = randomNumber();
   gameSequence.push(gameButtons[move]);
-  
+
   // 1s delay in between each sequence
   gameSequence.forEach((move, i) => {
     setTimeout(() => {
+      playSound(move);
       animateButton(move);
+
     }, i * 1000)
   })
+
+  setTimeout(() => {
+    displayTurn("your")
+  }, (gameSequence.length) * 1000)
+
 }
 
 const checkSequence = () => {
@@ -51,15 +65,20 @@ const checkSequence = () => {
       currentSequence++;
     } else {
       updateLevel();
+
+      setTimeout(() => {
+        displayTurn("computer");
+      }, 1000)
+
       setTimeout(() => {
         nextSequence();
-      }, 1000)
+      }, 1500)
     }
 
   } else {
-    console.log("game over")
-    restartButton.style.visibility = "visible";
-    gameOver.style.visibility = "visible";
+    gameOver = true;
+    turnContainer.classList.remove("show");
+    gameOverContainer.classList.add("show");
   }
   
 }
@@ -69,13 +88,24 @@ const updateLevel = () => {
   level.textContent = currentLevel;
 }
 
+const displayTurn = (player) => {
+  whoseTurn = player;
+  turn.textContent = `${whoseTurn} turn`;
+}
+
 const animateButton = (buttonId) => {
   const button = document.getElementById(buttonId);
 
   button.classList.add("pressed");
+  playSound(buttonId)
   setTimeout(() => {
     button.classList.remove("pressed");
   }, 300);
+}
+
+const playSound = (btnId) => {
+  const audio = new Audio(`./assets/${btnId}.mp3`);
+  audio.play();
 }
 
 const randomNumber = () => {
@@ -84,6 +114,11 @@ const randomNumber = () => {
 
 const startGame = () => {
   resetGame();
+  gameOver = false;
+
+  startButton.classList.add('hide');
+  turnContainer.classList.add('show');
+  displayTurn("computer");
 
   setTimeout(() => {
     nextSequence();
@@ -97,12 +132,10 @@ const resetGame = () => {
   gameSequence = [];
 
   level.textContent = currentLevel;
-  restartButton.style.visibility = "hidden";
-  gameOver.style.visibility = "hidden";
 }
 
 restartButton.addEventListener("click", () => {
   startGame();
 });
 
-startGame();
+startButton.addEventListener("click", startGame)

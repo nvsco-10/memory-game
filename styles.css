@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  padding: 10px;
+  padding: 0;
 }
 
 body {
@@ -12,50 +12,112 @@ body {
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   text-align: center;
   height: 3rem;
-  padding: 20px 0;
+  padding: 20px;
+
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-header div {
-  display: flex;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+.logo {
+  font-size: l.5rem;
 }
 
 button {
-  height: 50px;
   padding: 0.25em 0.75em;
   font-family: inherit;
   cursor: pointer;
-}
+} 
 
-.game-over {
-  font-size: 2rem;
-  color: rgb(34, 255, 0);
-  /* visibility: hidden; */
-}
-
-.restart-button {
-  /* visibility: hidden; */
-  margin-left: 1rem;
+button:hover {
+  transform: scale(1.01);
 }
 
 main {
-   display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-height: calc(100vh - 3rem);
+  padding-top: 1.5rem;
+  position: relative;
+
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.game-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-control-container {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 3rem);
-  
+  margin-bottom: 2rem;
+}
+
+.game-over-container {
+  display: none;
+}
+
+.start-button {
+  background-color: rgb(34, 255, 0);
+  border: solid 2px white;
+  font-size: 2rem;
+}
+
+.turn-container {
+  display: none;
+}
+
+.turn {
+  background-color: yellow;
+  color: black;
+  /* border: solid 2px white; */
+  font-size: 2rem;
+  text-transform: uppercase;
+  padding: 0.25em 0.75em;
+}
+
+.game-over {
+  font-size: 3rem;
+  color: rgb(34, 255, 0);
+}
+
+.restart-button {
+  height: 3rem;
+  margin: auto 1rem 0;
+} 
+
+.level-container {
+  width: 100%;
+  padding: 10px 0;
+  background-color: white;
+  border: solid 2px rgb(234, 255, 0);
+  text-align: center;
+  /* margin-top: 10px; */
+}
+
+.level-text {
+  font-size: 1.5rem;
+  color: black;
 }
 
 .button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
@@ -130,4 +192,11 @@ main {
   box-shadow: 0 0 20px rgb(243, 243, 243);
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
 
