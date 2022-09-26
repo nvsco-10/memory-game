@@ -12,7 +12,7 @@ const gameButtons = ["red", "green", "yellow", "blue", "orange", "purple"];
 let gameSequence = [];
 let playerSequence = [];
 let currentSequence = 0;
-let currentLevel = 0;
+let currentLevel = 1;
 let whoseTurn;
 let gameOver;
 
@@ -127,7 +127,7 @@ const startGame = () => {
 }
 
 const resetGame = () => {
-  currentLevel = 0;
+  currentLevel = 1;
   currentSequence = 0;
   playerSequence = [];
   gameSequence = [];
